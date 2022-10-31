@@ -1,9 +1,9 @@
 import { useCartContext } from "../../context/CartContext"
-
+import "./ItemCart.css"
 const ItemCart = ({product}) => {
 const { removeProduct } = useCartContext()
     return (
-        <table className="table table-success table-striped">
+        <table className="table table-light m-2 table-striped">
             <thead>
                 <tr>
                 <th scope="col">#</th>
@@ -20,9 +20,9 @@ const { removeProduct } = useCartContext()
                 <td><img src={product.image} alt={product.title}/></td>
                 <td>{product.title}</td>
                 <td>{product.cantidad}</td>
-                <td>{product.price}</td>
-                <td>Subtotal: ${product.cantidad * product.price}</td>
-                <td><button onClick={ () => removeProduct(product.id) }>X</button></td>
+                <td>$ {product.price}</td>
+                <td>$ {product.cantidad * product.price}</td>
+                <td><button onClick={ () => removeProduct(product.id) } type="button" className="btn-close" aria-label="Close"></button></td>
                 </tr>
             </tbody>
         </table>

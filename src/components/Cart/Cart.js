@@ -12,7 +12,7 @@ const Cart = () => {
         phone:"",
         address:""
      })
-    const { cart, totalPrice, vaciarCart } = useCartContext()
+    const { cart, totalPrice, clearCart } = useCartContext()
      
     
     const order = {
@@ -53,10 +53,10 @@ const Cart = () => {
 
      if (cart.length === 0) {
         return (
-            <>
-                <p>No hay elementos en el carrito</p>
-                <Link to= "/">Hacer compras</Link>
-            </>
+            <div className="container text-center">
+                <h3>No hay elementos en el carrito</h3>
+                <Link to= "/"><button type="button" className="btn btn-light">Hacer compras</button></Link>
+            </div>
         )
      }
     
@@ -72,9 +72,9 @@ const Cart = () => {
             {
                 cart.map(product => <ItemCart key={product.id} product={product}/>)
             }
-            <p> total: {totalPrice()}</p>
+            <h4 className="m-4"> total: $ {totalPrice()}</h4>
             
-            <form onSubmit={generarOrden} className="row g-3 needs-validation m-4" novalidate>
+            <form onSubmit={generarOrden} className=" g-3 needs-validation m-4" novalidate>
                 <div className="col-md-4 position-relative">
                     <label for="validationTooltip01" className="form-label">Nombre</label>
                     <input onChange={handleInputChange} type="text" name="name" value={dataForm.name} className="form-control" id="validationTooltip01"  required/>
@@ -106,10 +106,8 @@ const Cart = () => {
                     </div>
                 </div>
                 <button className="btn btn-primary m-4" type="submit">Generar order</button>
+                <button className="btn btn-light m-5" onClick={clearCart}>vaciar carrito</button>
             </form>
-
-
-            <button onClick={vaciarCart}>vaciar carrito</button>
             
         </>
   )
